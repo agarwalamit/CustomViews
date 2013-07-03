@@ -19,9 +19,12 @@ public class MainActivity extends Activity{
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		
 		hView = (com.example.customviews.CustomHorizontalScrollView)findViewById(R.id.hscrollview);
-
-		//getImageResourceFromJson();
+		String json = getJsonFromFile();
+		hView.addStoreFrontImage(json, "line1Text","line2Text");
+	}
+	public String getJsonFromFile(){
 		AssetManager am = this.getAssets();
 		InputStream is = null;
 		try {
@@ -30,17 +33,6 @@ public class MainActivity extends Activity{
 			System.out.println("problem reading file");
 			e.printStackTrace();
 		}
-		String json = getJsonFromFile(is);
-		url1="http://img6a.flixcart.com/image/t-shirt/s/n/g/wsmad-kb-t1-tee09turquoise-madagascar-400x400-imadkfvvwvmzvcjz.jpeg";
-		url2="http://img6a.flixcart.com/image/t-shirt/s/n/g/wsmad-kb-t1-tee09turquoise-madagascar-400x400-imadkfvvwvmzvcjz.jpeg";
-		url3="http://img6a.flixcart.com/image/t-shirt/s/n/g/wsmad-kb-t1-tee09turquoise-madagascar-400x400-imadkfvvwvmzvcjz.jpeg";
-		//		hView.addStoreFrontImage(url1,"LIFESTYLE", "&FASHION");
-		//		hView.addStoreFrontImage(url2,"ELECTRONICS", "&GADGETS");		
-		//		hView.addStoreFrontImage(url3,"BOOKS", "&MEDIA");
-		
-		hView.addStoreFrontImage(json, "line1Text","line2Text");
-	}
-	public String getJsonFromFile(InputStream is){
 		String json="";
 		BufferedReader br = null;
 
