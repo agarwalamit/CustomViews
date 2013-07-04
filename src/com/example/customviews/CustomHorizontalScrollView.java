@@ -47,7 +47,7 @@ public class CustomHorizontalScrollView extends HorizontalScrollView{
 		super(context);
 		this.items = widgetItems;
 	}
-
+//to be used with widgets
 	public void drawContent(){
 		for(int i=0;i<items.size();i++){
 			JSONObject value = items.get(i).getValue();
