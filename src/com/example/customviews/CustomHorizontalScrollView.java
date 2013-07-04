@@ -87,10 +87,11 @@ public class CustomHorizontalScrollView extends HorizontalScrollView{
 		super(context, attrs);
 		this.context= context;
 		//params for the CustomHorizontalScrollView
-		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.MATCH_PARENT,
-				LinearLayout.LayoutParams.WRAP_CONTENT);
-		setLayoutParams(lp);
+		//defined in xml
+//		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+//				LinearLayout.LayoutParams.MATCH_PARENT,
+//				LinearLayout.LayoutParams.WRAP_CONTENT);
+//		setLayoutParams(lp);
 		setBackgroundResource(R.drawable.storefrontbackground);
 
 		//the linearlayout for scrollview

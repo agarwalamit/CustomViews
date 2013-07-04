@@ -1,7 +1,6 @@
 package com.example.customviews;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -20,7 +19,7 @@ public class MainActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		
-		hView = (com.example.customviews.CustomHorizontalScrollView)findViewById(R.id.hscrollview);
+		hView = (com.example.customviews.CustomHorizontalScrollView)findViewById(R.id.customhorizontalscrollview);
 		String json = getJsonFromFile();
 		hView.addStoreFrontImage(json, "line1Text","line2Text");
 	}

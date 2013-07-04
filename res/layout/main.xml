@@ -6,10 +6,16 @@
     android:orientation="vertical" >
 
     <com.example.customviews.CustomHorizontalScrollView
-        android:id="@+id/hscrollview"
+        android:id="@+id/customhorizontalscrollview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#AAAAAAAA" >
     </com.example.customviews.CustomHorizontalScrollView>
+
+    <com.example.customviews.CategoryStoreThreeItemWidget
+        android:id="@+id/categorystorethreeitemwidget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </com.example.customviews.CategoryStoreThreeItemWidget>
 
 </LinearLayout>

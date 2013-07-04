@@ -151,7 +151,7 @@ public class CustomImageDownloader {
 
 		@Override
 		protected void onPostExecute(final Bitmap bitmap) {
-			//System.out.println("Download completed!!");
+			System.out.println("Download completed!!...");
 			if(listner != null){
 				listner.onDownloadCompleted(bitmap);
 			}
@@ -250,12 +250,14 @@ public class CustomImageDownloader {
 	}
 
 	private Bitmap downloadBitmap(String url, Context context) {
+
 		HttpParams params = new BasicHttpParams();
 		params.setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
 		HttpConnectionParams.setConnectionTimeout(params, 5000);
 		HttpConnectionParams.setSoTimeout(params, 5000);
 
 		HttpClient client = new DefaultHttpClient(params);
+		
 		final HttpGet getRequest = new HttpGet(url);
 		try {
 			HttpResponse response = client.execute(getRequest);
@@ -264,12 +266,13 @@ public class CustomImageDownloader {
 				Log.w("ImageDownloader", "Error " + statusCode + " while retrieving bitmap from " + url); 
 				return null;
 			}
-
+			
 			final HttpEntity entity = response.getEntity();
 			if (entity != null) {
 				InputStream inputStream = null;
 				try {
 					inputStream = entity.getContent();
+					System.out.println("downn...");
 
 					final Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
 					if(bitmap != null){
@@ -342,7 +345,7 @@ public class CustomImageDownloader {
 
 	private interface OnDownloadCompletedListner{
 
-		public void onDownloadCompleted(Bitmap bitmap);
+		public void onDownloadCompleted(Bitmap bitmap);		
 
 	}
 
