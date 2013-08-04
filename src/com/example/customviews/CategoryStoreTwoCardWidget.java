@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
@@ -18,18 +19,19 @@ import android.widget.TextView;
 
 public class CategoryStoreTwoCardWidget extends LinearLayout{
 
-	private final int SCREEN_LEFT_PADDING_DP = 2;
-	private final int SCREEN_TOP_PADDING_DP = 5;
-	private final int SCREEN_RIGHT_PADDING_DP = 2;
-	private final int SCREEN_BOTTOM_PADDING_DP = 5;
+	private final int SCREEN_LEFT_PADDING_DP = 5;
+	private final int SCREEN_TOP_PADDING_DP = 10;
+	private final int SCREEN_RIGHT_PADDING_DP = 5;
+	private final int SCREEN_BOTTOM_PADDING_DP = 10;
 
-	private final int SCREEN_LEFT_MARGIN_DP = 2;
-	private final int SCREEN_TOP_MARGIN_DP = 5;
-	private final int SCREEN_RIGHT_MARGIN_DP = 2;
-	private final int SCREEN_BOTTOM_MARGIN_DP = 5;
+	private final int CONTENT_LEFT_PADDING_DP = 5;
+	private final int CONTENT_TOP_PADDING_DP = 5;
+	private final int CONTENT_RIGHT_PADDING_DP = 5;
+	private final int CONTENT_BOTTOM_PADDING_DP = 5;
 
-	private final int IMAGE_LEFT_MARGIN_DP = 2;
-	private final int IMAGE_RIGHT_MARGIN_DP = 2;
+	
+	private final int IMAGE_LEFT_MARGIN_DP = 5;
+	private final int IMAGE_RIGHT_MARGIN_DP = 5;
 
 	private final int TEXT_VIEW_MARGIN_TOP_DP = 5;
 	private final int FONT_SIZE_SP = 12;
@@ -43,8 +45,11 @@ public class CategoryStoreTwoCardWidget extends LinearLayout{
 
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT);
-
+	
 		setLayoutParams(lp);
+		setBackgroundResource(R.drawable.storefrontbackground);
+		setPadding(dpToPx(SCREEN_LEFT_PADDING_DP),dpToPx(SCREEN_TOP_PADDING_DP),dpToPx(SCREEN_RIGHT_PADDING_DP),dpToPx(SCREEN_BOTTOM_PADDING_DP));
+		
 
 	}
 
@@ -65,6 +70,7 @@ public class CategoryStoreTwoCardWidget extends LinearLayout{
 				int width = metrics.widthPixels;
 				String screenWidth = ""+width;
 
+				System.out.println("scwidth"+screenWidth);
 				JSONObject image = value.getJSONObject("image");
 				String line1Text = value.getString("line1Text");
 
@@ -75,6 +81,7 @@ public class CategoryStoreTwoCardWidget extends LinearLayout{
 
 					@Override
 					public void onClick(View arg0) {
+						System.out.println("2card");
 					}
 				});
 				addView(storeContent);	
@@ -101,6 +108,14 @@ public class CategoryStoreTwoCardWidget extends LinearLayout{
 				storeContent.addContent(imageUrlList.get(i),line1Text);		
 
 				addView(storeContent);		
+				storeContent.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						System.out.println("two card");
+					}
+				});
 			}catch (Exception e) {
 				System.out.println("smbfashb"+e);
 				if(storeContent == null)
@@ -131,27 +146,35 @@ public class CategoryStoreTwoCardWidget extends LinearLayout{
 
 	private class StoreContent extends LinearLayout {
 
+		int contentWidthPx;
 		public StoreContent(Context context, AttributeSet attrs) {
 			super(context, attrs);
 
 			DisplayMetrics metrics = this.getResources().getDisplayMetrics();
 			int screenWidth = metrics.widthPixels;
-			int totalPaddingDp = 10+2*(IMAGE_LEFT_MARGIN_DP + IMAGE_RIGHT_MARGIN_DP);
+			System.out.println("scwidth"+screenWidth+" den="+metrics.densityDpi+" den="+metrics.density+" scaled den="+metrics.scaledDensity);
+			int totalPaddingDp = 2*(IMAGE_LEFT_MARGIN_DP + IMAGE_RIGHT_MARGIN_DP) + SCREEN_LEFT_PADDING_DP + SCREEN_RIGHT_PADDING_DP;
+			contentWidthPx = (screenWidth-dpToPx(totalPaddingDp))/2;
 			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-					(screenWidth-dpToPx(totalPaddingDp))/2,
+					contentWidthPx,
 					LayoutParams.WRAP_CONTENT);	
 			lp.setMargins(dpToPx(IMAGE_LEFT_MARGIN_DP),0,dpToPx(IMAGE_RIGHT_MARGIN_DP),0);
-
+			setPadding(dpToPx(CONTENT_LEFT_PADDING_DP), dpToPx(CONTENT_TOP_PADDING_DP),
+					dpToPx(CONTENT_RIGHT_PADDING_DP),dpToPx(CONTENT_BOTTOM_PADDING_DP));
+			
 			setLayoutParams(lp);
 			setOrientation(LinearLayout.VERTICAL);
-			//setBackgroundColor(0x00000000);
-			setBackgroundColor(0xAAAAAAAA);
+			setBackgroundColor(Color.WHITE);
+			//setBackgroundColor(0xAAAAAAAA);
 		}
 
 		public void addContent(String imageUrl,String line1Text){
+			
 			try{
+				int imageHeightPx = (int)(((float)320/(float)720)*134);
+				System.out.println("ht="+imageHeightPx);
 				LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams
-						(dpToPx(95), dpToPx(117));
+						(contentWidthPx - dpToPx(CONTENT_LEFT_PADDING_DP + CONTENT_RIGHT_PADDING_DP), imageHeightPx);
 
 				//imageview
 				ImageView iv=new ImageView(context);
@@ -164,10 +187,10 @@ public class CategoryStoreTwoCardWidget extends LinearLayout{
 				//textview1
 				LinearLayout.LayoutParams textViewParams = new LinearLayout.LayoutParams
 						(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-				textViewParams.setMargins(dpToPx(10),0,0,0);
+				textViewParams.setMargins(dpToPx(CONTENT_LEFT_PADDING_DP),dpToPx(CONTENT_LEFT_PADDING_DP),0,0);
 				//textViewParams.setMargins(0, dpToPx(TEXT_VIEW_MARGIN_TOP_DP), 0, 0);
 				TextView line1=new TextView(context);
-				line1.setText(line1Text+"");
+				line1.setText(line1Text.toUpperCase()+"");
 				line1.setTypeface(Typeface.DEFAULT_BOLD);
 				line1.setLayoutParams(textViewParams);		
 
@@ -186,6 +209,7 @@ public class CategoryStoreTwoCardWidget extends LinearLayout{
 	private int dpToPx(int dp)
 	{
 		float density = context.getApplicationContext().getResources().getDisplayMetrics().density;
+		System.out.println("dptopx density="+density);
 		return Math.round((float)dp * density);
 	}
 }

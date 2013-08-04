@@ -56,7 +56,7 @@ public class CustomHorizontalScrollView extends HorizontalScrollView{
 				//screen size
 				DisplayMetrics metrics = this.getResources().getDisplayMetrics();
 				int width = metrics.widthPixels;
-				String screenWidth = ""+width;
+				 String screenWidth = ""+width;
 
 				JSONObject image = value.getJSONObject("image");
 				String line1Text = value.getString("line1Text");
@@ -147,6 +147,7 @@ public class CustomHorizontalScrollView extends HorizontalScrollView{
 
 			DisplayMetrics metrics = this.getResources().getDisplayMetrics();
 			int screenWidth = metrics.widthPixels;
+			System.out.println("scwidth"+screenWidth);
 			int totalPaddingDp = SCREEN_LEFT_PADDING_DP + SCREEN_RIGHT_PADDING_DP + 3*(IMAGE_LEFT_MARGIN_DP + IMAGE_RIGHT_MARGIN_DP);
 			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
 					(screenWidth-dpToPx(totalPaddingDp))/3,
@@ -179,7 +180,7 @@ public class CustomHorizontalScrollView extends HorizontalScrollView{
 					(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 			textViewParams.setMargins(0, dpToPx(TEXT_VIEW_MARGIN_TOP_DP), 0, 0);
 			TextView line1=new TextView(context);
-			line1.setText(line1Text);
+			line1.setText(line1Text.toUpperCase());
 			line1.setTypeface(Typeface.DEFAULT_BOLD);
 			line1.setLayoutParams(textViewParams);		
 			line1.setTextSize(TypedValue.COMPLEX_UNIT_SP,FONT_SIZE_SP);
@@ -189,7 +190,7 @@ public class CustomHorizontalScrollView extends HorizontalScrollView{
 			LinearLayout.LayoutParams textViewParams2 = new LinearLayout.LayoutParams
 					(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 			TextView line2=new TextView(context);
-			line2.setText(line2Text);
+			line2.setText(line2Text.toUpperCase());
 			line2.setTypeface(Typeface.DEFAULT_BOLD);
 			line2.setLayoutParams(textViewParams2);
 			line2.setTextSize(TypedValue.COMPLEX_UNIT_SP,FONT_SIZE_SP);
@@ -203,6 +204,7 @@ public class CustomHorizontalScrollView extends HorizontalScrollView{
 	private int dpToPx(int dp)
 	{
 		float density = context.getApplicationContext().getResources().getDisplayMetrics().density;
+		
 		return Math.round((float)dp * density);
 	}
 }

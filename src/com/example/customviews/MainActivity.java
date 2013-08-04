@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.res.AssetManager;
@@ -20,21 +21,35 @@ public class MainActivity extends Activity{
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		String json;
+
+		//		hView = (com.example.customviews.CustomHorizontalScrollView)findViewById(R.id.customhorizontalscrollview);
+		//		json = getJsonFromFile("Json");
+		//		hView.addStoreFrontImage(json, "line1Text","line2Text");
+
+		//		categoryStoreThreeItemWidget = (com.example.customviews.CategoryStoreThreeItemWidget)
+		//				findViewById(R.id.categorystorethreeitemwidget);
+		//		json = getJsonFromFile("Json2");
+		//		categoryStoreThreeItemWidget.addContent(json,"line1Text");
+
+
 		
-		hView = (com.example.customviews.CustomHorizontalScrollView)findViewById(R.id.customhorizontalscrollview);
-		String json = getJsonFromFile("Json");
-		hView.addStoreFrontImage(json, "line1Text","line2Text");
-		
-		categoryStoreThreeItemWidget = (com.example.customviews.CategoryStoreThreeItemWidget)
-				findViewById(R.id.categorystorethreeitemwidget);
-		json = getJsonFromFile("Json2");
-		categoryStoreThreeItemWidget.addContent(json,"line1Text");
+//		categoryStoreTwoCardWidget = (com.example.customviews.CategoryStoreTwoCardWidget)
+//				findViewById(R.id.categorystoretwocardwidget);
+//		json = getJsonFromFile("Json3");
+//		categoryStoreTwoCardWidget.addContent(json,"line1Text");
+
+		ArrayList<WidgetItem> widgetItems;
 		
 		categoryStoreTwoCardWidget = (com.example.customviews.CategoryStoreTwoCardWidget)
 				findViewById(R.id.categorystoretwocardwidget);
-		json = getJsonFromFile("Json3");
-		categoryStoreTwoCardWidget.addContent(json,"line1Text");
-		
+		//getWidgetsItemsFromJsonFile("Json3",widgetItems);
+		categoryStoreTwoCardWidget.drawContent();
+
+
+
+	}
+	public void getWidgetsItemsFromJsonFile(String json,ArrayList<WidgetItem> widgetItems){
 		
 	}
 	public String getJsonFromFile(String fileName){
